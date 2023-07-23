@@ -14,10 +14,6 @@ public class SquareRegion extends AbstractRegion {
 
     public SquareRegion(List<Block> blocks) {
         super(blocks);
-        Player player = Bukkit.getServer().getPlayer("LowLag");
-        for (Block block : getFrameBlocks()) {
-            player.sendBlockChange(block.getLocation(), Material.OAK_WOOD, (byte) 0);
-        }
     }
 
     @Override
@@ -50,4 +46,8 @@ public class SquareRegion extends AbstractRegion {
         return blocks;
     }
 
+    @Override
+    public Collection<Block> getCornerBlocks() {
+        return null;
+    }
 }

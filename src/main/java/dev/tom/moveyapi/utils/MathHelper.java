@@ -1,28 +1,14 @@
 package dev.tom.moveyapi.utils;
 
+import dev.tom.moveyapi.movements.enums.MovementDirection;
 import org.bukkit.block.Block;
+import org.bukkit.util.Vector;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class MathHelper {
 
-    public static int[] widthLength(List<Block> blocks){
-        int width = ( blocks.stream()
-                .mapToInt(b -> b.getLocation().getBlockX()).min().getAsInt() )
-                -
-                (blocks.stream()
-                        .mapToInt(b -> b.getLocation().getBlockX()).max().getAsInt());
-
-        int length = ( blocks.stream()
-                .mapToInt(b -> b.getLocation().getBlockZ()).min().getAsInt() )
-                -
-                (blocks.stream()
-                        .mapToInt(b -> b.getLocation().getBlockZ()).max().getAsInt());
-
-
-        return new int[]{width, length};
-    }
 
     public static RegionPoints getMaxPoints(List<Block> blocks){
         Block xMin, xMax, yMin, yMax, zMin, zMax;
@@ -33,11 +19,31 @@ public class MathHelper {
         zMin = blocks.stream().min(Comparator.comparingInt(b -> b.getLocation().getBlockZ())).get();
         zMax = blocks.stream().max(Comparator.comparingInt(b -> b.getLocation().getBlockZ())).get();
 
-//        System.out.println(xMax  + " " +  xMin  + " " +   zMax + " " + zMin);
         return new RegionPoints(xMax, xMin, yMax, yMin, zMax, zMin);
     }
 
-    public static int getLowestBlock(List<Block> blocks){
-        return blocks.stream().min(Comparator.comparingInt(b -> b.getLocation().getBlockY())).get().getY();
+    public static Vector getMovementVector(MovementDirection face) {
+        switch (face) {
+            case NORTH: {
+                return new Vector(0, 0, -1);
+            }
+            case SOUTH: {
+                return new Vector(0, 0, 1);
+            }
+            case EAST: {
+                return new Vector(1, 0, 0);
+            }
+            case WEST: {
+                return new Vector(-1, 0, 0);
+            }
+            case UP: {
+                return new Vector(0, 1, 0);
+            }
+            case DOWN: {
+                return new Vector(0, -1, 0);
+            }
+        }
+        return null;
     }
+
 }

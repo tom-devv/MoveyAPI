@@ -18,9 +18,9 @@ public class TestCommand implements CommandExecutor {
 
         BlockRise blockRise = new BlockRise(MovementDirection.UP,  AddBlock.blocks);
 
-        for (Block frameBlock : blockRise.getRegion().getFillingBlocks()) {
-            player.sendBlockChange(frameBlock.getLocation(), Material.GLASS, (byte) 0);
-        }
+//        for (Block frameBlock : blockRise.getRegion().getFillingBlocks()) {
+//            player.sendBlockChange(frameBlock.getLocation(), Material.GLASS, (byte) 0);
+//        }
 
         return true;
     }
